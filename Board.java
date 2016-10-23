@@ -1,35 +1,29 @@
 import java.util.*;
 
 public class Board{
-  private char[][] board;
-  private char[] piece;
+  private final int boardSize = 9;
+  private char[] board;
 
   Board(){
     //initialize board
-    board = new char[3][3];
+    board = new char[9];
     for(int i = 0; i < board.length; i++){
-      for(int j = 0; j < board.length; j++){
-        board[i][j] = '0';
-      }
-    }
-
-    //initalize possible values
-    for(int i = 0; i < piece.length; i++){
-      piece[i] = (char)(i + '0');
+      board
     }
   }
-/*"012  [0 0] [0 1] [0 2]
-   345  [1 0] [1 1] [1 1]
-   678" [2 0] [2 1] [2 2]
- */
+
   public void inputBoard(String places){
+    int index = 0;
     for(int i = 0; i < 3; i++){
       for(int j = 0; j < 3; j++){
-        board[i][j] = places.charAt(i*j);
-        if(places.charAt(i*j) == '0')
-
+        board[i][j] = places.charAt(index);
+        index++;
       }
     }
+  }
+
+  public Arraylist<Board> getMoves(){
+
   }
 
   public void display(){
