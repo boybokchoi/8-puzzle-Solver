@@ -124,6 +124,17 @@ public class Board{
   }
 
   /*
+   * Returns whether or not the board is the goal state.
+   */
+  public boolean isGoal(){
+    for(int i = 0; i < BOARD_SIZE; i++){
+      if(board[i] != GOAL_STATE[i])
+        return false;
+    }
+    return true;
+  }
+
+  /*
    * Swaps values of Board.
    */
   public void swap(int index1, int index2){
@@ -143,5 +154,4 @@ public class Board{
     }
     //System.out.println("empty Index:: " + emptyIndex);
   }
-
 }
