@@ -2,12 +2,12 @@ import java.util.*;
 
 public class Board{
   private final int BOARD_SIZE = 9;
+  private final char[] GOAL_STATE = {'0','1','2','3','4','5','6','7','8'};
   private char[] board;
   private int emptyIndex;
 
   Board(){
     emptyIndex = 0;
-
     //initialize board
     board = new char[BOARD_SIZE];
     for(int i = 0; i < BOARD_SIZE; i++){
@@ -15,6 +15,9 @@ public class Board{
     }
   }
 
+  /*
+   * Accepts string of values as Board's corresponding values.
+   */
   public void inputBoard(String places){
     int index = 0;
     for(int i = 0; i < BOARD_SIZE; i++){
@@ -71,25 +74,67 @@ public class Board{
     return boards;
   }
 
+  /* Heuristic Function:
+   * Returns number of misplaced tiles.
+   */
+  public int getNumMisplacedTiles(){
+    int count = 0;
+    for(int i = 0; i < BOARD_SIZE; i++){
+      if(board[i] != GOAL_STATE[i] && board[i] != '0'){
+        //System.out.println("board[i]: "+board[i]+"|goal[i]: "+GOAL_STATE[i]);
+        count++;
+      }
+    }
+    return count;
+  }
+
+  /* Heuristic Function:
+   * Returns manhattan distance of current board.
+   */
+  public int getManhattanDistance(){
+    int mDist = 0;
+    int index = 0;  //actual index of board
+
+    //Double for-loop to simulate the indices for a 2-D array
+    for(int i = 0; i < 3; i++){
+      for(int j = 0; j < 3; j++){
+        int val = Character.getNumericValue(board[index]);
+        if(val != 0){
+          int xDist = val%3;
+          int yDist = val/3;
+          mDist += Math.abs(yDist - i) + Math.abs(xDist - j);
+        }
+        index++;
+      }
+    }
+    return mDist;
+  }
+
   /*
    * Returns a different Board object with the same values as the Board passed.
    */
   private Board copyBoard(){
     Board b = new Board();
     String places = "";
-    for(int i = 0; i < b.BOARD_SIZE; i++){
+    for(int i = 0; i < BOARD_SIZE; i++){
       places += board[i];
     }
     b.inputBoard(places);
     return b;
   }
 
+  /*
+   * Swaps values of Board.
+   */
   public void swap(int index1, int index2){
     char temp = board[index1];
     board[index1] = board[index2];
     board[index2] = temp;
   }
 
+  /*
+   * Displays the current state of Board.
+   */
   public void display(){
     for(int i = 0; i < BOARD_SIZE; i++){
       System.out.print(board[i] + " ");
