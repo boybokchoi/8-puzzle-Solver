@@ -134,7 +134,8 @@ public class Board{
   }
   /*
    *  Returns whether or not the Board can be solved.
-   *  Counts the number of inversions and checks if it is even.
+   *  Counts the number of inversions for each index and checks
+   *  if the sum of them is even.
    */
   public boolean isSolveable(){
     int numInverted = 0;
